@@ -20,7 +20,7 @@ ENV \
     
 COPY ./files/${ORACLE_XE_RPM} /tmp/
 
-RUN yum install -y oracle-database-preinstall-18c && \
+RUN yum install -y oracle-database-preinstall-18c oracle-instantclient18.3-basic oracle-instantclient18.3-sqlplus libaio libnsl && \
   yum install -y /tmp/${ORACLE_XE_RPM} && \
   rm -rf /tmp/${ORACLE_XE_RPM}
 
