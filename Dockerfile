@@ -18,7 +18,6 @@ ENV \
   ORACLE_XE_RPM=oracle-database-xe-18c-1.0-1.x86_64.rpm \
   CHECK_DB_FILE=checkDBStatus.sh
     
-COPY ./files/gorm_init.sql ${ORACLE_HOME}/
 COPY ./files/${ORACLE_XE_RPM} /tmp/
 
 RUN yum install -y oracle-database-preinstall-18c oracle-instantclient18.3-basic oracle-instantclient18.3-sqlplus libaio libnsl && \
@@ -26,8 +25,9 @@ RUN yum install -y oracle-database-preinstall-18c oracle-instantclient18.3-basic
   rm -rf /tmp/${ORACLE_XE_RPM}
 
 COPY ./scripts/*.sh ${ORACLE_BASE}/scripts/
+COPY ./files/*.sql ${ORACLE_BASE}/scripts/
 
-RUN chmod a+x ${ORACLE_BASE}/scripts/*.sh 
+RUN chmod a+x -R ${ORACLE_BASE}/scripts
 
 # 1521: Oracle listener
 # 5500: Oracle Enterprise Manager (EM) Express listener.
