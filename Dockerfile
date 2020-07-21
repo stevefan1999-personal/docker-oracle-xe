@@ -18,6 +18,7 @@ ENV \
   ORACLE_XE_RPM=oracle-database-xe-18c-1.0-1.x86_64.rpm \
   CHECK_DB_FILE=checkDBStatus.sh
     
+COPY ./files/gorm_init.sql ${ORACLE_HOME}/
 COPY ./files/${ORACLE_XE_RPM} /tmp/
 
 RUN yum install -y oracle-database-preinstall-18c oracle-instantclient18.3-basic oracle-instantclient18.3-sqlplus libaio libnsl && \

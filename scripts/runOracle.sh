@@ -146,6 +146,9 @@ else
   # Enable EM remote access
   echo "Setting up remote access"
   runuser oracle -s /bin/bash -c "${ORACLE_BASE}/scripts/${EM_REMOTE_ACCESS} ${EM_GLOBAL_ACCESS_YN:-N}"
+
+  echo "Setting up Gorm test database seed script"
+  runuser oracle -s /bin/bash -c "sqlplus / as sysdba @${ORACLE_HOME}/gorm_init.sql"
    
   echo "Initial setup complete"
   touch /setup_complete
